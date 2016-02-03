@@ -80,12 +80,13 @@ public class SCP {
             linha = br.readLine();
         }
         int aj = 0;
-        for(ArrayList a : listaLinha){
+        /*for(ArrayList a : listaLinha){
             System.out.println(aj++ + " --> " + a);
-        }
+        }*/
+        //System.out.println(listaColuna.get());
         
         int qtdPop = 5;
-        //algoritmoGenetico(listaPeso, listaColuna, qtdPop);
+        algoritmoGenetico(listaPeso, listaColuna, listaLinha, qtdPop, nLinha);
         
         
         
