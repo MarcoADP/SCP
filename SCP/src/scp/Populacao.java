@@ -11,21 +11,31 @@ public class Populacao {
     
     public static Cromossomo[] geraPopulacao(int qtd, ArrayList<ArrayList<Integer>> listaColuna, ArrayList<Integer>[] listaLinha, int nLinha, ArrayList<Double> listaPeso){
         //Populacao pop = new Populacao(qtd);
-        
-        
-        
+
         Cromossomo[] cr = new Cromossomo[qtd];
         
-        //for(int i = 0; i < qtd; i++){
+        for(int i = 0; i < qtd; i++){
+            System.out.println("\nCromossomo " + (i+1));
             Cromossomo cromossomo = new Cromossomo(nLinha);
-            cromossomo = cromossomo.geraIndividuo(nLinha, listaColuna, listaLinha, listaPeso);
+            cromossomo.geraIndividuo(nLinha, listaColuna, listaLinha, listaPeso);
             System.out.println("lista => " + cromossomo.listaElementos);
-            for(int i = 0; i <= nLinha; i++){
-                System.out.println(i + " --> " + cromossomo.qtdLinhaCoberto[i]);
-            }
+            cromossomo.eliminaRedundancia(listaColuna);
+            /*for(int j = 0; j <= nLinha; j++){
+                System.out.println(j + " --> " + cromossomo.qtdLinhaCoberto[j]);
+            }*/
             //cr[i] = cromossomo;
             
-       //}
+       }
+        /*for(int ia = 0; ia<qtd-1; ia++){
+            System.out.print(ia + " --> ");
+            for(int ib = ia+1; ib < qtd; ib++){
+                System.out.print(ib + "--");
+                if(cr[ia].listaElementos.equals(cr[ib].listaElementos)){
+                    System.out.println("igual!!");
+                }
+            }
+            System.out.println();
+        }*/
         return cr;
         //return pop;
     }

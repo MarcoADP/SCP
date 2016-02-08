@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import static java.lang.Math.random;
 import java.util.ArrayList;
 import static scp.Algoritmo.algoritmoGenetico;
 
@@ -83,12 +82,22 @@ public class SCP {
             linha = br.readLine();
         }
         int aj = 0;
-        /*for(ArrayList a : listaLinha){
+        /*System.out.println("Lista Linha:");
+        for(ArrayList a : listaLinha){
             System.out.println(aj++ + " --> " + a);
         }*/
-        //System.out.println(listaColuna.get());
+        /*
+        aj = 0;
+        System.out.println("\n\nLista Coluna:");
+        for(ArrayList a: listaColuna){
+            System.out.println(aj++ + " --> " + a);
+        }*/
+        /*System.out.println("\n\nLista Peso");
+        for(double a : listaPeso){
+            System.out.println(aj++ + " --> " + a);
+        }*/
         
-        int qtdPop = 5;
+        int qtdPop = 50;
         algoritmoGenetico(listaPeso, listaColuna, listaLinha, qtdPop, nLinha);
         
         

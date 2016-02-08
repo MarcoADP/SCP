@@ -23,11 +23,9 @@ public class Cromossomo {
         }
     }
 
-    public Cromossomo geraIndividuo(int nLinha, ArrayList<ArrayList<Integer>> listaColuna, ArrayList<Integer>[] listaLinha, ArrayList<Double> listaPeso){
+    public void geraIndividuo(int nLinha, ArrayList<ArrayList<Integer>> listaColuna, ArrayList<Integer>[] listaLinha, ArrayList<Double> listaPeso){
         //listaLinha -> ALFHAi
         //listaColuna -> BHETAj
-        
-        Cromossomo cr = new Cromossomo(nLinha);
 
         Random ran = new Random();
 
@@ -40,7 +38,7 @@ public class Cromossomo {
 
 
         while(descobertasLinhas.size() != 1){
-            System.out.println((descobertasLinhas));
+            //System.out.println((descobertasLinhas));
             int escolhidaPosicao = ran.nextInt(descobertasLinhas.size()-1) + 1; //escolhe posicao aleatoria
             //System.out.print("\nDe 1 a " + descobertasLinhas.size() + " == Posicao -> " + escolhidaPosicao + " ## ");
             int escolhidaLinha = descobertasLinhas.get(escolhidaPosicao); //escolhe linha na posicao
@@ -79,9 +77,53 @@ public class Cromossomo {
 
             }
         }
-        cr.listaElementos = solucaoColunas;
-        cr.qtdLinhaCoberto = cobremLinhas;
-        return cr;
+        this.listaElementos = solucaoColunas;
+        this.qtdLinhaCoberto = cobremLinhas;
     }
-        
+       
+    public void eliminaRedundancia(ArrayList<ArrayList<Integer>> listaColuna){
+        ArrayList<Integer> T = new ArrayList<>();
+        for(int a : this.listaElementos){
+            T.add(a);
+        }
+        while(!T.isEmpty()){
+            Random random = new Random();
+            int num = random.nextInt(T.size());
+            //System.out.println("Tamanho => " + T.size() + "  Numero escolhido => " + num);
+            //int pos = Util.buscaBinaria(T, num, 0, T.size());
+            int escolhidaColuna = T.get(num);
+            //System.out.print("\nColuna => " + escolhidaColuna);
+            T.remove(num);
+            //System.out.println(T);
+            //System.out.println("\nColuna: " + escolhidaColuna);
+            boolean maior2 = true;
+            for(int a : listaColuna.get(escolhidaColuna)){
+                //System.out.print(" -- " + a);
+                if(this.qtdLinhaCoberto[a] < 2){
+                    maior2 = false;
+                    break;
+                }
+            }
+            if(maior2){
+                //System.out.println("entrou!!");
+                //int tam = this.listaElementos.size();
+                //int pos = Util.buscaBinaria(this.listaElementos, escolhidaColuna, 0, tam);
+                //System.out.println(this.listaElementos);
+                //System.out.println(escolhidaColuna);
+                int pos = 0;
+                for(int a : this.listaElementos){
+                    if(a == escolhidaColuna){
+                        break;
+                    }
+                    pos++;
+                }
+                this.listaElementos.remove(pos);
+                //System.out.println(this.listaElementos);
+                
+                for(int a : listaColuna.get(escolhidaColuna)){
+                    this.qtdLinhaCoberto[a] = this.qtdLinhaCoberto[a] - 1;
+                }
+            }
+        }
+    }
 }
