@@ -15,7 +15,7 @@ public class Populacao {
         Cromossomo[] cr = new Cromossomo[qtd];
         
         for(int i = 0; i < qtd; i++){
-            System.out.println("\nCromossomo " + (i+1));
+            System.out.println("Cromossomo " + (i+1));
             Cromossomo cromossomo = new Cromossomo(nLinha);
             cromossomo.geraIndividuo(nLinha, listaColuna, listaLinha, listaPeso);
             System.out.println("lista => " + cromossomo.listaElementos);
@@ -23,18 +23,18 @@ public class Populacao {
             /*for(int j = 0; j <= nLinha; j++){
                 System.out.println(j + " --> " + cromossomo.qtdLinhaCoberto[j]);
             }*/
-            //cr[i] = cromossomo;
+            cr[i] = cromossomo;
             
-       }
+        }
         /*for(int ia = 0; ia<qtd-1; ia++){
-            System.out.print(ia + " --> ");
+            //System.out.print(ia + " --> ");
             for(int ib = ia+1; ib < qtd; ib++){
-                System.out.print(ib + "--");
+                //System.out.print(ib + "--");
                 if(cr[ia].listaElementos.equals(cr[ib].listaElementos)){
-                    System.out.println("igual!!");
+                    System.out.println(ia + " e " + ib + "--> igual!!");
                 }
             }
-            System.out.println();
+            //System.out.println();
         }*/
         return cr;
         //return pop;
