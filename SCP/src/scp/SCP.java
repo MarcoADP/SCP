@@ -43,7 +43,10 @@ public class SCP {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //Estrturas Utilizadas
         ArrayList<Double> listaPeso = new ArrayList<>();
+        listaPeso.add(-1.0);
         ArrayList<ArrayList<Integer>> listaColuna = new ArrayList<>();
+        ArrayList<Integer> nula = new ArrayList<>();
+        listaColuna.add(nula);
         //ArrayList<ArrayList<Integer>> listaLinha = new ArrayList<>();
         ArrayList<Integer>[] listaLinha = new ArrayList[nLinha+1];
         for(int a = 0; a <= nLinha; a++){
@@ -80,12 +83,23 @@ public class SCP {
             linha = br.readLine();
         }
         int aj = 0;
+        /*System.out.println("Lista Linha:");
         for(ArrayList a : listaLinha){
             System.out.println(aj++ + " --> " + a);
-        }
+        }*/
+        /*
+        aj = 0;
+        System.out.println("\n\nLista Coluna:");
+        for(ArrayList a: listaColuna){
+            System.out.println(aj++ + " --> " + a);
+        }*/
+        /*System.out.println("\n\nLista Peso");
+        for(double a : listaPeso){
+            System.out.println(aj++ + " --> " + a);
+        }*/
         
         int qtdPop = 5;
-        //algoritmoGenetico(listaPeso, listaColuna, qtdPop);
+        algoritmoGenetico(listaPeso, listaColuna, listaLinha, qtdPop, nLinha);
         
         
         
