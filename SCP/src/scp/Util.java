@@ -1,6 +1,8 @@
 package scp;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Util {
     
@@ -54,5 +56,14 @@ public class Util {
         }
         System.out.println("nao achou!");
         return -1;*/
+    }
+
+    public static ArrayList<Integer> uniao(ArrayList<Integer> lista1, ArrayList<Integer> lista2){
+        Set<Integer> set = new HashSet<>();
+
+        set.addAll(lista1);
+        set.addAll(lista2);
+
+        return new ArrayList<Integer>(set);
     }
 }

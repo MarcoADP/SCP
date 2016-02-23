@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import static scp.Algoritmo.algoritmoGenetico;
 
 public class SCP {
@@ -22,10 +24,12 @@ public class SCP {
     
     public static void main(String[] args) throws FileNotFoundException, IOException {
         
+        //Caso1: 422.43
+        //Caso2: 398.69
+        //Caso3: 417.13
         
         
-        
-        String arq = "teste2.txt";
+        String arq = "teste1.txt";
         FileInputStream stream = new FileInputStream(arq);
         InputStreamReader reader = new InputStreamReader(stream);
         //InputStreamReader reader = new InputStreamReader(System.in);
@@ -86,22 +90,38 @@ public class SCP {
         for(ArrayList a : listaLinha){
             System.out.println(aj++ + " --> " + a);
         }*/
-        /*
-        aj = 0;
-        System.out.println("\n\nLista Coluna:");
+        
+        //aj = 0;
+        /*System.out.println("\n\nLista Coluna:");
         for(ArrayList a: listaColuna){
             System.out.println(aj++ + " --> " + a);
-        }*/
+        }
         /*System.out.println("\n\nLista Peso");
         for(double a : listaPeso){
             System.out.println(aj++ + " --> " + a);
         }*/
         
-        int qtdPop = 50;
-        algoritmoGenetico(listaPeso, listaColuna, listaLinha, qtdPop, nLinha);
+        int qtdPop = 500;
+        Cromossomo resposta = algoritmoGenetico(listaPeso, listaColuna, listaLinha, qtdPop, nLinha);
+        Double custoResposta = resposta.custoTotal;
+        ArrayList<Integer> elementosResposta = resposta.listaElementos;
+        System.out.println("custo => " + custoResposta);
+        System.out.println("Elementos = > " + elementosResposta);
         
-        
-        
+        /*ArrayList<Double> peso;
+        Collections.sort(listaPeso);
+        int foi = 1;
+        int soma = 0;
+        for(Double a : listaPeso){
+            soma += a;
+            if(a < 60){
+                foi++;
+            }
+            //System.out.println(a);
+        }
+        //System.out.println(foi);
+        int tam = listaPeso.size();
+        //System.out.println(soma/tam);*/
         
     }
     

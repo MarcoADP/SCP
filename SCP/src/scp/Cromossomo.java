@@ -8,12 +8,20 @@ public class Cromossomo {
     int qtdLinhaCoberto[];
     Double custoTotal;
 
-    public Cromossomo(int nLinha) {
-        this.listaElementos = new ArrayList<>();
+    public Cromossomo(int nLinha, ArrayList<ArrayList<Integer>> listaColuna, ArrayList<Integer>[] listaLinha, ArrayList<Double> listaPeso) {
+        //this.listaElementos = new ArrayList<>();
         this.qtdLinhaCoberto = new int[nLinha];
-        custoTotal = 0.0;
+        this.custoTotal = 0.0;
+        this.geraIndividuo(nLinha, listaColuna, listaLinha, listaPeso);
+        //custoTotal = 0.0;
     }
-
+    
+    public Cromossomo(){
+        this.listaElementos = new ArrayList<>();
+        this.qtdLinhaCoberto = null;
+        this.custoTotal = 0.0;
+    }
+    
     public Cromossomo(ArrayList<Integer> lista, ArrayList<Double> peso){
         this.listaElementos = lista;
         this.custoTotal = 0.0;
@@ -62,6 +70,9 @@ public class Cromossomo {
             //System.out.println("\nElementos da Coluna: " + escolhidaColuna + " => "+ listaColuna.get(escolhidaColuna));
             //System.out.println(escolhidaColuna + " == " + menor);
             solucaoColunas.add(escolhidaColuna);                        // S <- S + escolhidaColuna;
+            //System.out.println("Lista Peso => " + listaPeso.size() +  " Peso => " + listaPeso.get(escolhidaColuna) + "  COLUNA => " + escolhidaColuna);
+            
+            this.custoTotal += listaPeso.get(escolhidaColuna);
             for(int ln : listaColuna.get(escolhidaColuna)){
                 //System.out.print(ln + " - " + descobertasLinhas.get(ln) + " // ");
                 //System.out.print("\n" + ln + " - ");
@@ -81,7 +92,7 @@ public class Cromossomo {
         this.qtdLinhaCoberto = cobremLinhas;
     }
        
-    public void eliminaRedundancia(ArrayList<ArrayList<Integer>> listaColuna){
+    public void eliminaRedundancia(ArrayList<ArrayList<Integer>> listaColuna, ArrayList<Double> listaPeso){
         ArrayList<Integer> T = new ArrayList<>();
         for(int a : this.listaElementos){
             T.add(a);
@@ -117,13 +128,40 @@ public class Cromossomo {
                     }
                     pos++;
                 }
-                this.listaElementos.remove(pos);
-                //System.out.println(this.listaElementos);
+                int colExcluida = this.listaElementos.remove(pos);
+                this.custoTotal -= listaPeso.get(colExcluida);
+                //System.out.println("oii");
                 
                 for(int a : listaColuna.get(escolhidaColuna)){
                     this.qtdLinhaCoberto[a] = this.qtdLinhaCoberto[a] - 1;
                 }
             }
         }
+    }
+
+    public Double calculaCusto(int nLinha, ArrayList<ArrayList<Integer>> listaColuna, ArrayList<Double> listaPeso){
+        Double custo = 0.0;
+        int coberta[] = new int[nLinha+1];
+        for(int col : this.listaElementos){
+            //System.out.print(col + " -- " + listaPeso.get(col)+ " ==> ");
+            //System.out.println(col);
+            custo += listaPeso.get(col);
+            
+            for(int ln : listaColuna.get(col)){
+                //System.out.print(ln + " -- ");
+                coberta[ln] += 1;
+            }
+            //System.out.println();
+        }
+        this.qtdLinhaCoberto = coberta;
+        return custo;
+    }
+
+    public void addColuna(int coluna, ArrayList<Double> listaPeso){
+        if(this.listaElementos.contains(coluna)){
+            return;
+        }
+        this.listaElementos.add(coluna);
+        this.custoTotal += listaPeso.get(coluna);
     }
 }
