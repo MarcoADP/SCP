@@ -73,7 +73,8 @@ public class Populacao {
 
     public Cromossomo classificaPopulacao(){
         int qtd_escolhido = 3;
-        Cromossomo cr[] = new Cromossomo[qtd_escolhido];
+        //Cromossomo cr[] = new Cromossomo[qtd_escolhido];
+        Cromossomo cr[] = new Cromossomo[this.qtdPop];
         Random random = new Random();
         Cromossomo crMin = new Cromossomo();
         //random.setSeed(System.nanoTime());
